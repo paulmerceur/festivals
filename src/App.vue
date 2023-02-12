@@ -4,7 +4,10 @@
 
 <script>
 export default {
-  name: 'App'
+    name: 'App',
+    created() {
+        document.title = "Festival du Jeu";
+    }
 }
 </script>
 

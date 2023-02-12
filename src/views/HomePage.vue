@@ -1,11 +1,10 @@
-// Example
 <template>
     <div class="page">
         <!-- Logo -->
         <div class="logo">
             <img src="../assets/logo.png" alt="App logo" />
         </div>
-        <ListeJeux :jeux="this.notes"></ListeJeux>
+        <ListeJeux :jeux="this.jeux"></ListeJeux>
     </div>
 </template>
 
