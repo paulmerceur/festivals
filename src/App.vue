@@ -9,4 +9,14 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('../public/style.css');
+
+* {
+    font-family: var(--font-family), sans-serif;
+    color: black;
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
 </style>
