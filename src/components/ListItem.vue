@@ -11,14 +11,17 @@
         </div>
     </div>
     <div v-else-if="type==='benevole' " class="list-item benevole" :class="{ header: isHeader }">
-        <div class="list-item__title">
-            {{item.nom}}
+        <div class="list-item__prenom">
+            {{item.benevoles.prenom}}
         </div>
-        <div class="list-item__type">
-            {{item.type}}
+        <div class="list-item__nom">
+            {{item.benevoles.nom}}
         </div>
-        <div class="list-item__zone">
-            {{item.zone.nom}}
+        <div class="list-item__email">
+            {{item.benevoles.email}}
+        </div>
+        <div class="list-item__creneau">
+            {{item.creneau}}
         </div>
     </div>
 </template>
@@ -53,6 +56,9 @@ export default {
     width: 33.3%;
 }
 
+.benevole > * {
+    width: 25%;
+}
 .header {
     background-color: var(--gray);
     font-weight: bold;

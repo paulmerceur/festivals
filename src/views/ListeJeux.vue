@@ -28,6 +28,7 @@ export default {
             });
         },
         goToJeuView(id) {
+            localStorage.setItem('currentJeuId', id);
             this.$router.push('jeu/' + id);
         }
     },
