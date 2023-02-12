@@ -4,8 +4,8 @@
             <img src="../assets/logo.png" alt="App logo" />
         </div>
         <div class="list">
-            <ListItem :jeu="listHeader" :isHeader=true></ListItem>
-            <ListItem v-for="jeu in jeux" :key="jeu.id" :jeu="jeu"></ListItem>
+            <ListItem :item="listHeader" :type="'jeu'" :isHeader=true></ListItem>
+            <ListItem v-for="jeu in jeux" :key="jeu.id" :item="jeu" :type="'jeu'"></ListItem>
         </div>
     </div>
 </template>

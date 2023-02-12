@@ -1,13 +1,24 @@
 <template>
-    <div class="list-item" :class="{ header: isHeader }">
+    <div v-if="type==='jeu' " class="list-item jeu" :class="{ header: isHeader }">
         <div class="list-item__title">
-            {{jeu.nom}}
+            {{item.nom}}
         </div>
         <div class="list-item__type">
-            {{jeu.type}}
+            {{item.type}}
         </div>
-        <div class="list-item__description">
-            {{jeu.zone.nom}}
+        <div class="list-item__zone">
+            {{item.zone.nom}}
+        </div>
+    </div>
+    <div v-else-if="type==='benevole' " class="list-item benevole" :class="{ header: isHeader }">
+        <div class="list-item__title">
+            {{item.nom}}
+        </div>
+        <div class="list-item__type">
+            {{item.type}}
+        </div>
+        <div class="list-item__zone">
+            {{item.zone.nom}}
         </div>
     </div>
 </template>
@@ -16,7 +27,8 @@
 export default {
     name: 'ListItem',
     props: {
-        jeu: Object,
+        item: Object,
+        type: String,
         isHeader: Boolean
     }
 }
@@ -37,7 +49,7 @@ export default {
     justify-content: space-between;
 }
 /* All elements inside list-item take 33.3% width */
-.list-item > * {
+.jeu > * {
     width: 33.3%;
 }
 
