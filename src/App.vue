@@ -5,6 +5,9 @@
 <script>
 export default {
     name: 'App',
+    data() { return {
+        base_url: 'https://festivals-api.onrender.com/'
+    }},
     created() {
         document.title = "Festival du Jeu";
     }

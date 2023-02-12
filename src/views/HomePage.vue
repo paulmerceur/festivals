@@ -16,12 +16,11 @@ export default {
         ListeJeux
     },
     data() { return {
-        jeux: [],
-        base_url: 'http://localhost:3000/'
+        jeux: []
     }},
     methods: {
         getJeux: async function() {
-            await fetch(this.base_url + "jeux/").then(res => res.json()).then(data => {
+            await fetch(this.$root.base_url + "jeux/").then(res => res.json()).then(data => {
                 this.jeux = data;
             });
         }
