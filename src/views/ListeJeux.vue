@@ -1,8 +1,6 @@
 <template>
     <div class="page">
-        <div class="logo">
-            <img src="../assets/logo.png" alt="App logo" />
-        </div>
+        <PageHeader></PageHeader>
         <div class="list">
             <ListItem :item="listHeader" :type="'jeu'" :isHeader=true></ListItem>
             <ListItem v-for="jeu in jeux" :key="jeu.id" :item="jeu" :type="'jeu'" @click="goToJeuView(jeu.id)"></ListItem>
@@ -12,10 +10,12 @@
 
 <script>
 import ListItem from '../components/ListItem.vue'
+import PageHeader from '@/components/PageHeader.vue';
 export default {
     name: 'ListeJeux',
     components: {
-        ListItem
+        ListItem,
+        PageHeader
     },
     data() { return {
         jeux: [],
@@ -39,11 +39,6 @@ export default {
 </script>
 
 <style>
-.home {
-    text-align: center;
-    margin-top: 60px;
-}
-
 .logo {
     width: 100px;
     height: 100px;

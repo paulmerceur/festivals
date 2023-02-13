@@ -1,35 +1,44 @@
 <template>
     <div class="page">
-        <div class="logo">
-            <img src="../assets/logo.png" alt="App logo" />
-        </div>
+        <PageHeader></PageHeader>
         <h1 class="nom">{{jeu.nom}}</h1>
         <h2 class="type">Type de jeu: {{jeu.type}}</h2>
         <h3 class="benevoles">Liste des bénévoles</h3>
         <div class="list">
             <ListItem :item="listHeader" :type="'benevole'" :isHeader=true></ListItem>
-            <ListItem v-for="benevole in benevoles" :key="benevole.benevoles.id" :item="benevole" :type="'benevole'"></ListItem>
+            <ListItem v-for="benevole in benevoles" :key="benevole.id" :item="benevole" :type="'benevole'"></ListItem>
         </div>
     </div>
 </template>
 
 <script>
 import ListItem from '../components/ListItem.vue'
+import PageHeader from '@/components/PageHeader.vue';
 export default {
     name: 'JeuView',
     components: {
-        ListItem
+        ListItem,
+        PageHeader
     },
     data() { return {
         benevoles: [],
-        listHeader: {benevoles: {prenom: "Prénom", nom: "Nom", email: "Email"}, creneau: "Créneau"},
+        listHeader: {prenom: "Prénom", nom: "Nom", email: "Email", creneau: "Créneau"},
         currentJeuId: "",
         jeu: {}
     }},
     methods: {
         getBenevoles: async function() {
-            await fetch(this.$root.base_url + "benevoles/zone/" + this.jeu.zone ).then(res => res.json()).then(data => {
+            await fetch(this.$root.base_url + "benevoles/zone/" + this.jeu.zone.id ).then(res => res.json()).then(data => {
                 this.benevoles = data;
+                if (this.benevoles[0].benevoles) {
+                    this.benevoles.forEach(benevole => {
+                        benevole.id = benevole.benevoles.id;
+                        benevole.prenom = benevole.benevoles.prenom;
+                        benevole.nom = benevole.benevoles.nom;
+                        benevole.email = benevole.benevoles.email;
+                        delete benevole.benevoles;
+                    });
+                }
             });
         },
         getJeu: async function() {
@@ -49,19 +58,21 @@ export default {
 
 <style>
 
-    .nom {
+    .page {
+        width: 100%;
         text-align: center;
+    }
+
+    .nom {
         margin-top: 10px;
     }
 
     .type {
-        text-align: center;
         margin-top: 10px;
     }
 
     .benevoles {
-        margin-top: 20px;
-        margin-left: 160px;
+        margin-top: 50px;
     }
 
     .home {

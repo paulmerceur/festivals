@@ -12,13 +12,13 @@
     </div>
     <div v-else-if="type==='benevole' " class="list-item benevole" :class="{ header: isHeader }">
         <div class="list-item__prenom">
-            {{item.benevoles.prenom}}
+            {{item.prenom}}
         </div>
         <div class="list-item__nom">
-            {{item.benevoles.nom}}
+            {{item.nom}}
         </div>
         <div class="list-item__email">
-            {{item.benevoles.email}}
+            {{item.email}}
         </div>
         <div class="list-item__creneau">
             {{item.creneau}}
@@ -50,6 +50,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    cursor: pointer;
 }
 /* All elements inside list-item take 33.3% width */
 .jeu > * {
@@ -62,5 +63,6 @@ export default {
 .header {
     background-color: var(--gray);
     font-weight: bold;
+    cursor: default;
 }
 </style>
