@@ -40,6 +40,7 @@ export default {
 <style>
 .list-item {
     width: 80%;
+    max-width: 1200px;
     background-color: var(--light-gray);
     border-radius: 5px;
     padding: 10px;
@@ -55,10 +56,12 @@ export default {
 /* All elements inside list-item take 33.3% width */
 .jeu > * {
     width: 33.3%;
+    text-align: left;
 }
 
 .benevole > * {
     width: 25%;
+    text-align: left;
 }
 .header {
     background-color: var(--gray);

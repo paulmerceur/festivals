@@ -9,13 +9,13 @@ export default {
         base_url: 'https://festivals-api.onrender.com/'
     }},
     created() {
-        document.title = "Festival du Jeu";
+        document.title = "GameFest";
     }
 }
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
 @import url('../public/style.css');
 
 * {
