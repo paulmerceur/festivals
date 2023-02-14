@@ -30,14 +30,16 @@ export default {
         getBenevoles: async function() {
             await fetch(this.$root.base_url + "benevoles/zone/" + this.jeu.zone.id ).then(res => res.json()).then(data => {
                 this.benevoles = data;
-                if (this.benevoles[0].benevoles) {
-                    this.benevoles.forEach(benevole => {
-                        benevole.id = benevole.benevoles.id;
-                        benevole.prenom = benevole.benevoles.prenom;
-                        benevole.nom = benevole.benevoles.nom;
-                        benevole.email = benevole.benevoles.email;
-                        delete benevole.benevoles;
-                    });
+                if (this.benevoles[0] != undefined) {
+                    if (this.benevoles[0].benevoles != undefined) {
+                        this.benevoles.forEach(benevole => {
+                            benevole.id = benevole.benevoles.id;
+                            benevole.prenom = benevole.benevoles.prenom;
+                            benevole.nom = benevole.benevoles.nom;
+                            benevole.email = benevole.benevoles.email;
+                            delete benevole.benevoles;
+                        });
+                    }
                 }
             });
         },
@@ -49,9 +51,8 @@ export default {
         },
     },
     mounted() {
-        this.currentJeuId = localStorage.getItem('currentJeuId');
+        this.currentJeuId = this.$router.currentRoute._value.params.id;
         this.getJeu();
-        
     }
 }
 </script>

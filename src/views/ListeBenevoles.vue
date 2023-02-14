@@ -28,7 +28,6 @@ export default {
             });
         },
         goToBenevoleView(id) {
-            localStorage.setItem('currentBenevoleId', id);
             this.$router.push('benevole/' + id);
         }
     },

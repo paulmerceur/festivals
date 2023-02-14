@@ -5,13 +5,13 @@
                 <img src="../assets/logo.png" alt="App logo" />
             </div>
             <div id="tabMenu">
-                <button class="tab">
+                <button class="tab" :class="{activeTab: this.currentRoute == 'ListeJeux'}">
                     <router-link to="/jeux">Jeux</router-link>
                 </button>
-                <button class="tab">
+                <button class="tab" :class="{activeTab: this.currentRoute == 'ListeBenevoles'}">
                     <router-link to="/benevoles">Bénévoles</router-link>
                 </button>
-                <button class="tab">
+                <button class="tab" :class="{activeTab: this.currentRoute == 'ListeZones'}">
                     <router-link to="/zones">Zones</router-link>
                 </button>
             </div>
@@ -27,8 +27,10 @@ export default {
             this.$router.push('/');
         }
     },
-    created() {
-        console.log(this.$router.currentRoute._value.name)
+    computed: {
+        currentRoute() {
+            return this.$router.currentRoute._value.name;
+        }
     }
 }
 </script>
@@ -83,5 +85,9 @@ export default {
 }
 .tab > *:link {
     text-decoration: none;
+}
+
+.activeTab {
+    background-color: var(--gray);
 }
 </style>

@@ -1,8 +1,7 @@
 <template>
     <div class="page">
         <PageHeader></PageHeader>
-        <h1 class="nom">{{benevole.prenom}} {{benevole.nom}}</h1>
-        <h2 class="email">{{benevole.email}}</h2>
+        <h1 class="nom">{{zone.nom}}</h1>
         <h3 class="jeux">Liste des jeux</h3>
         <div class="list">
             <ListItem :item="listHeader" :type="'jeu'" :isHeader=true></ListItem>
@@ -15,33 +14,33 @@
 import PageHeader from '@/components/PageHeader.vue'
 import ListItem from '../components/ListItem.vue'
 export default {
-    name: 'BenevoleView',
+    name: 'ZoneView',
     components: {
         ListItem,
         PageHeader
     },
     data() { return {
         jeux: [],
-        listHeader: {nom: "Nom", zone: {nom: "Zone"}, creneau: "Créneau"},
-        currentBenevoleId: "",
-        benevole: {}
+        listHeader: {nom: "Nom", type: "Type"},
+        currentZoneId: "",
+        zone: {}
     }},
     methods: {
         getJeux: async function() {
-            await fetch(this.$root.base_url + "jeux/benevole/" + this.benevole.id ).then(res => res.json()).then(data => {
+            await fetch(this.$root.base_url + "jeux/zone/" + this.zone.id ).then(res => res.json()).then(data => {
                 this.jeux = data;
             });
         },
-        getBenevole: async function() {
-            await fetch(this.$root.base_url + "benevoles/" + this.currentBenevoleId).then(res => res.json()).then(data => {
-                this.benevole = data[0];
+        getZone: async function() {
+            await fetch(this.$root.base_url + "zones/" + this.currentZoneId).then(res => res.json()).then(data => {
+                this.zone = data[0];
                 this.getJeux();
             });
         },
     },
     mounted() {
-        this.currentBenevoleId = this.$router.currentRoute._value.params.id;
-        this.getBenevole();
+        this.currentZoneId = this.$router.currentRoute._value.params.id;
+        this.getZone();
     }
 }
 </script>
@@ -54,10 +53,6 @@ export default {
     }
 
     .nom {
-        margin-top: 10px;
-    }
-
-    .email {
         margin-top: 10px;
     }
 

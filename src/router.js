@@ -4,6 +4,7 @@ import JeuView from "@/views/JeuView.vue";
 import ListeBenevoles from "@/views/ListeBenevoles.vue";
 import BenevoleView from "@/views/BenevoleView.vue";
 import ListeZones from "@/views/ListeZones.vue";
+import ZoneView from "@/views/ZoneView.vue";
 
 const routes = [
     { 
@@ -32,6 +33,11 @@ const routes = [
         path: '/zones',
         component: ListeZones,
     },
+    {
+        name: 'ZoneView',
+        path: '/zone/:id',
+        component: ZoneView,
+    }
 ]
 
 const router = createRouter({

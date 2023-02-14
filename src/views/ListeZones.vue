@@ -23,11 +23,9 @@ export default {
         getZones: async function() {
             await fetch(this.$root.base_url + "zones/").then(res => res.json()).then(data => {
                 this.zones = data;
-                console.log(this.zones)
             });
         },
         goToZoneView(id) {
-            localStorage.setItem('currentZoneId', id);
             this.$router.push('zone/' + id);
         }
     },

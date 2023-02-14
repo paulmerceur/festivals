@@ -31,7 +31,7 @@ export default {
                     this.displayedItem = {
                         nom: this.item.nom,
                         type: this.item.type,
-                        zone: this.item.zone.nom,
+                        zone: this.zone != undefined ? this.item.zone.nom : undefined,
                         creneau: this.item.creneau
                     }
                     break;
