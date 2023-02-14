@@ -1,24 +1,23 @@
 /* Color palette */
 :root {
     --white: #FFFFFF;
-    --dark-gray: #1A1A1A;
     --gray: #8d8d8d;
     --light-gray: #f2f2f3;
-    --white-bone: #E1E1E1;
-    --deep-gray: #232427;
+    --light-blue: #B7DCEB;
+    --blue: #A3C4D1;
+    --dark-blue: #85A0AB;
+    /* --white-bone: #E1E1E1;
     --cool-blue: #335979;
     --cool-pink: #f02eaa;
     --light-blue: #4c86b6;
     --box-shadow-none: #00000026 1.95px 1.95px 2.6px;
-    --box-shadow-cool: #33597966 5px 5px, #3359794d 10px 10px, #33597933 15px 15px, #3359791a 20px 20px, #3359790d 25px 25px; 
+    --box-shadow-cool: #33597966 5px 5px, #3359794d 10px 10px, #33597933 15px 15px, #3359791a 20px 20px, #3359790d 25px 25px; */
 }
 
 /* Style variables */
 :root {
-    --bg-color: var(--dark-gray);
-    --bg2-color: var(--dark-gray);
-    --accent-color: var(--cool-blue);
-    --font-color: var(--dark-gray);
-    --box-shadow: var(--box-shadow-none);
+    --primary: var(--white);
+    --secondary: var(--light-gray);
+    --tertiary: var(--gray);
     --font-family: 'montserrat';
 }

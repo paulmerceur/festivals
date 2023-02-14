@@ -72,7 +72,7 @@ export default {
 .list-item {
     width: 80%;
     max-width: 1200px;
-    background-color: var(--light-gray);
+    background-color: var(--secondary);
     border-radius: 5px;
     padding: 10px;
     padding-left: 50px;
@@ -90,7 +90,7 @@ export default {
 }
 
 .header {
-    background-color: var(--gray);
+    background-color: var(--tertiary);
     font-weight: bold;
     cursor: default;
 }

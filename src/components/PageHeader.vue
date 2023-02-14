@@ -5,14 +5,14 @@
                 <img src="../assets/logo.png" alt="App logo" />
             </div>
             <div id="tabMenu">
-                <button class="tab" :class="{activeTab: this.currentRoute == 'ListeJeux'}">
-                    <router-link to="/jeux">Jeux</router-link>
+                <button class="tab" :class="{activeTab: this.currentRoute == 'ListeJeux'}" @click="goToListeJeux">
+                    Jeux
                 </button>
-                <button class="tab" :class="{activeTab: this.currentRoute == 'ListeBenevoles'}">
-                    <router-link to="/benevoles">Bénévoles</router-link>
+                <button class="tab" :class="{activeTab: this.currentRoute == 'ListeBenevoles'}" @click="goToListeBenevoles">
+                    Bénévoles
                 </button>
-                <button class="tab" :class="{activeTab: this.currentRoute == 'ListeZones'}">
-                    <router-link to="/zones">Zones</router-link>
+                <button class="tab" :class="{activeTab: this.currentRoute == 'ListeZones'}" @click="goToListeZones">
+                    Zones
                 </button>
             </div>
         </div>
@@ -25,6 +25,15 @@ export default {
     methods: {
         goHome() {
             this.$router.push('/');
+        },
+        goToListeJeux() {
+            this.$router.push('/jeux');
+        },
+        goToListeBenevoles() {
+            this.$router.push('/benevoles');
+        },
+        goToListeZones() {
+            this.$router.push('/zones');
         }
     },
     computed: {
@@ -72,22 +81,23 @@ export default {
     /* same idea as the ListItems, rectangles with rounded corners */
     width: 150px;
     height: 40px;
-    background-color: var(--light-gray);
+    background-color: var(--secondary);
     border-radius: 10px;
     border: none;
     cursor: pointer;
     font-weight: 700;
     font-size: 1.2em;
     margin: 1em;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
 }
 .tab:hover {
-    background-color: var(--gray);
+    background-color: var(--tertiary);
 }
 .tab > *:link {
     text-decoration: none;
 }
 
 .activeTab {
-    background-color: var(--gray);
+    background-color: var(--tertiary);
 }
 </style>
