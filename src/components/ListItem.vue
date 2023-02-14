@@ -1,32 +1,7 @@
 <template>
-    <div v-if="type==='jeu' " class="list-item jeu" :class="{ header: isHeader }">
-        <div>
-            {{item.nom}}
-        </div>
-        <div>
-            {{item.type}}
-        </div>
-        <div>
-            {{item.zone.nom}}
-        </div>
-    </div>
-    <div v-else-if="type==='benevole' " class="list-item benevole" :class="{ header: isHeader }">
-        <div>
-            {{item.prenom}}
-        </div>
-        <div>
-            {{item.nom}}
-        </div>
-        <div>
-            {{item.email}}
-        </div>
-        <div>
-            {{item.creneau}}
-        </div>
-    </div>
-    <div v-else-if="type==='zone' " class="list-item zone" :class="{ header: isHeader }">
-        <div>
-            {{item.nom}}
+    <div class="list-item" :class="{ header: isHeader }">
+        <div v-for="(value, key) in displayedItem" :key="key" :style="{ width: childItemWidth }">
+            {{ value }}
         </div>
     </div>
 </template>
@@ -38,7 +13,43 @@ export default {
         item: Object,
         type: String,
         isHeader: Boolean
+    },
+    data() { return {
+        displayedItem: {}
+    } },
+    computed: {
+        childItemWidth() {
+            const propCount = Object.keys(this.displayedItem).filter(key => this.displayedItem[key] !== undefined).length;
+            return 100/propCount + '%';
+        }
+    },
+    methods: {
+        getDisplayedItem() {
+            switch(this.type) {
+                case 'jeu':
+                    this.displayedItem = {
+                        nom: this.item.nom,
+                        type: this.item.type,
+                        zone: this.item.zone.nom,
+                        creneau: this.item.creneau
+                    }
+                    break;
+                case 'benevole':
+                    this.displayedItem = {
+                        prenom: this.item.prenom,
+                        nom: this.item.nom,
+                        email: this.item.email,
+                        creneau: this.item.creneau
+                    }
+                    break;
+            }
+            Object.keys(this.displayedItem).forEach(key => this.displayedItem[key] === undefined ? delete this.displayedItem[key] : {});
+        }
+    },
+    created() {
+        this.getDisplayedItem();
     }
+
 }
 </script>
 
@@ -59,16 +70,7 @@ export default {
     cursor: pointer;
 }
 
-.jeu > * {
-    width: 33.3%;
-    text-align: left;
-}
-.benevole > * {
-    width: 25%;
-    text-align: left;
-}
-.zone > * {
-    width: 100%;
+.list-item > * {
     text-align: left;
 }
 
