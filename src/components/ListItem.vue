@@ -1,27 +1,32 @@
 <template>
     <div v-if="type==='jeu' " class="list-item jeu" :class="{ header: isHeader }">
-        <div class="list-item__title">
+        <div>
             {{item.nom}}
         </div>
-        <div class="list-item__type">
+        <div>
             {{item.type}}
         </div>
-        <div class="list-item__zone">
+        <div>
             {{item.zone.nom}}
         </div>
     </div>
     <div v-else-if="type==='benevole' " class="list-item benevole" :class="{ header: isHeader }">
-        <div class="list-item__prenom">
+        <div>
             {{item.prenom}}
         </div>
-        <div class="list-item__nom">
+        <div>
             {{item.nom}}
         </div>
-        <div class="list-item__email">
+        <div>
             {{item.email}}
         </div>
-        <div class="list-item__creneau">
+        <div>
             {{item.creneau}}
+        </div>
+    </div>
+    <div v-else-if="type==='zone' " class="list-item zone" :class="{ header: isHeader }">
+        <div>
+            {{item.nom}}
         </div>
     </div>
 </template>
@@ -53,16 +58,20 @@ export default {
     justify-content: space-between;
     cursor: pointer;
 }
-/* All elements inside list-item take 33.3% width */
+
 .jeu > * {
     width: 33.3%;
     text-align: left;
 }
-
 .benevole > * {
     width: 25%;
     text-align: left;
 }
+.zone > * {
+    width: 100%;
+    text-align: left;
+}
+
 .header {
     background-color: var(--gray);
     font-weight: bold;

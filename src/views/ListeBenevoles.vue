@@ -39,16 +39,6 @@ export default {
 </script>
 
 <style>
-.logo {
-    width: 100px;
-    height: 100px;
-    margin: 40px auto;
-}
-
-.logo img {
-    width: 100%;
-}
-
 .list {
     width: 100%;
     display: flex;
