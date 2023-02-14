@@ -2,7 +2,7 @@
     <div class="page">
         <PageHeader></PageHeader>
         <div class="list">
-            <ListItem v-for="zone in zones" :key="zone.id" :item="zone" :type="'zone'" @click="goToZoneView(zone.id)"></ListItem>
+            <ListItem v-for="zone in zones" :key="zone.id" :item="zone" :type="'zone'"></ListItem>
         </div>
     </div>
 </template>
@@ -24,9 +24,6 @@ export default {
             await fetch(this.$root.base_url + "zones/").then(res => res.json()).then(data => {
                 this.zones = data;
             });
-        },
-        goToZoneView(id) {
-            this.$router.push('zone/' + id);
         }
     },
     mounted() {

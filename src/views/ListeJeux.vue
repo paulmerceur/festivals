@@ -3,7 +3,7 @@
         <PageHeader></PageHeader>
         <div class="list">
             <ListItem :item="listHeader" :type="'jeu'" :isHeader=true></ListItem>
-            <ListItem v-for="jeu in jeux" :key="jeu.id" :item="jeu" :type="'jeu'" @click="goToJeuView(jeu.id)"></ListItem>
+            <ListItem v-for="jeu in jeux" :key="jeu.id" :item="jeu" :type="'jeu'"></ListItem>
         </div>
     </div>
 </template>
@@ -26,9 +26,6 @@ export default {
             await fetch(this.$root.base_url + "jeux/").then(res => res.json()).then(data => {
                 this.jeux = data;
             });
-        },
-        goToJeuView(id) {
-            this.$router.push('jeu/' + id);
         }
     },
     mounted() {

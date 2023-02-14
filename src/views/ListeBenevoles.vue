@@ -3,7 +3,7 @@
         <PageHeader></PageHeader>
         <div class="list">
             <ListItem :item="listHeader" :type="'benevole'" :isHeader=true></ListItem>
-            <ListItem v-for="benevole in benevoles" :key="benevole.id" :item="benevole" :type="'benevole'" @click="goToBenevoleView(benevole.id)"></ListItem>
+            <ListItem v-for="benevole in benevoles" :key="benevole.id" :item="benevole" :type="'benevole'"></ListItem>
         </div>
     </div>
 </template>
@@ -26,9 +26,6 @@ export default {
             await fetch(this.$root.base_url + "benevoles/").then(res => res.json()).then(data => {
                 this.benevoles = data;
             });
-        },
-        goToBenevoleView(id) {
-            this.$router.push('benevole/' + id);
         }
     },
     mounted() {

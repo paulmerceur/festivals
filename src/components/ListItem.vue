@@ -1,5 +1,5 @@
 <template>
-    <div class="list-item" :class="{ header: isHeader }">
+    <div class="list-item" :class="{ header: isHeader }" @click="goToItem">
         <div v-for="(value, key) in displayedItem" :key="key" :style="{ width: childItemWidth }">
             {{ value }}
         </div>
@@ -53,6 +53,12 @@ export default {
             }
             // Remove undefined properties
             Object.keys(this.displayedItem).forEach(key => this.displayedItem[key] === undefined ? delete this.displayedItem[key] : {});
+        },
+        // Go to the item page
+        goToItem() {
+            if (!this.isHeader) {
+                this.$router.push({ path: '/' + this.type + '/' + this.item.id });
+            }
         }
     },
     created() {
