@@ -24,6 +24,7 @@ export default {
         }
     },
     methods: {
+        // Get the displayed item based on the type
         getDisplayedItem() {
             switch(this.type) {
                 case 'jeu':
@@ -42,7 +43,15 @@ export default {
                         creneau: this.item.creneau
                     }
                     break;
+                case 'zone':
+                    this.displayedItem = {
+                        nom: this.item.nom
+                    }
+                    break;
+                default:
+                    this.displayedItem = this.item;
             }
+            // Remove undefined properties
             Object.keys(this.displayedItem).forEach(key => this.displayedItem[key] === undefined ? delete this.displayedItem[key] : {});
         }
     },
