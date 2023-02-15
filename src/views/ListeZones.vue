@@ -1,6 +1,7 @@
 <template>
     <div class="page">
         <PageHeader></PageHeader>
+        <img src="@/assets/carte_festival.png" class="image" alt="Carte du festival">
         <div class="list">
             <ListItem v-for="zone in zones" :key="zone.id" :item="zone" :type="'zone'"></ListItem>
         </div>
@@ -38,5 +39,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.image {
+  object-fit: cover;
 }
 </style>
