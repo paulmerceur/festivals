@@ -3,7 +3,9 @@
         <PageHeader></PageHeader>
         <h1 class="nom">{{zone.nom}}</h1>
         <h3 class="jeux">Liste des jeux</h3>
-        <SearchableList :items="jeux" :type="'jeu-par-zone'" :listHeader="listHeader"></SearchableList>
+        <SearchableList :items="jeux" :type="'jeu-par-zone'" :listHeader="jeuxHeader"></SearchableList>
+        <h3 class="benevoles">Liste des bénévoles</h3>
+        <SearchableList :items="benevoles" :type="'benevole'" :listHeader="benevolesHeader"></SearchableList>
     </div>
 </template>
 
@@ -18,22 +20,41 @@ export default {
 },
     data() { return {
         jeux: [],
-        listHeader: {nom: "Nom", type: "Type"},
+        benevoles: [],
+        jeuxHeader: {nom: "Nom", type: "Type"},
+        benevolesHeader: {prenom: "Prénom", nom: "Nom", email: "Email", creneau: "Créneau"},
         currentZoneId: "",
         zone: {}
     }},
     methods: {
+        getZone: async function() {
+            await fetch(this.$root.base_url + "zones/" + this.currentZoneId).then(res => res.json()).then(data => {
+                this.zone = data[0];
+                this.getJeux();
+                this.getBenevoles();
+            });
+        },
         getJeux: async function() {
             await fetch(this.$root.base_url + "jeux/zone/" + this.zone.id ).then(res => res.json()).then(data => {
                 this.jeux = data;
             });
         },
-        getZone: async function() {
-            await fetch(this.$root.base_url + "zones/" + this.currentZoneId).then(res => res.json()).then(data => {
-                this.zone = data[0];
-                this.getJeux();
+        getBenevoles: async function() {
+            await fetch(this.$root.base_url + "benevoles/zone/" + this.zone.id ).then(res => res.json()).then(data => {
+                this.benevoles = data;
+                if (this.benevoles[0] != undefined) {
+                    if (this.benevoles[0].benevoles != undefined) {
+                        this.benevoles.forEach(benevole => {
+                            benevole.id = benevole.benevoles.id;
+                            benevole.prenom = benevole.benevoles.prenom;
+                            benevole.nom = benevole.benevoles.nom;
+                            benevole.email = benevole.benevoles.email;
+                            delete benevole.benevoles;
+                        });
+                    }
+                }
             });
-        },
+        }
     },
     mounted() {
         this.currentZoneId = this.$router.currentRoute._value.params.id;

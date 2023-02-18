@@ -3,50 +3,24 @@
         <PageHeader></PageHeader>
         <h1 class="nom">{{jeu.nom}}</h1>
         <h2 class="type">Type de jeu: {{jeu.type}}</h2>
-        <h3 class="benevoles">Liste des bénévoles</h3>
-        <div class="list">
-            <ListItem :item="listHeader" :type="'benevole'" :isHeader=true></ListItem>
-            <ListItem v-for="benevole in benevoles" :key="benevole.id" :item="benevole" :type="'benevole'"></ListItem>
-        </div>
     </div>
 </template>
 
 <script>
-import ListItem from '../components/ListItem.vue'
 import PageHeader from '@/components/PageHeader.vue';
 export default {
     name: 'JeuView',
     components: {
-        ListItem,
         PageHeader
     },
     data() { return {
-        benevoles: [],
-        listHeader: {prenom: "Prénom", nom: "Nom", email: "Email", creneau: "Créneau"},
         currentJeuId: "",
         jeu: {}
     }},
     methods: {
-        getBenevoles: async function() {
-            await fetch(this.$root.base_url + "benevoles/zone/" + this.jeu.zone.id ).then(res => res.json()).then(data => {
-                this.benevoles = data;
-                if (this.benevoles[0] != undefined) {
-                    if (this.benevoles[0].benevoles != undefined) {
-                        this.benevoles.forEach(benevole => {
-                            benevole.id = benevole.benevoles.id;
-                            benevole.prenom = benevole.benevoles.prenom;
-                            benevole.nom = benevole.benevoles.nom;
-                            benevole.email = benevole.benevoles.email;
-                            delete benevole.benevoles;
-                        });
-                    }
-                }
-            });
-        },
         getJeu: async function() {
             await fetch(this.$root.base_url + "jeux/" + this.currentJeuId).then(res => res.json()).then(data => {
                 this.jeu = data[0];
-                this.getBenevoles();
             });
         },
     },

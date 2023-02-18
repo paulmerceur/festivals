@@ -1,11 +1,14 @@
 <template>
-    <input type="text" id="search-bar" v-model="searchBar" placeholder="Rechercher...">
-    <div class="list">
+    <div v-if="Object.keys(items).length != 0" class="list">
+        <input type="text" id="search-bar" v-model="searchBar" placeholder="Rechercher...">
         <ListItem v-if="listHeader!=undefined && filteredList()" :item="listHeader" :type="type" :isHeader=true></ListItem>
         <ListItem v-for="item in filteredList()" :key="item.id" :item="item" :type="type"></ListItem>
+        <div class="error" v-if="unsuccesfullSearch">
+            <p>Aucun resultat de correspond a votre recherche</p>
+        </div>
     </div>
-    <div class="error" v-if="searchBar&&!filteredList()">
-        <p>Aucun resultat de correcpond a votre recherche</p>
+    <div v-else class="empty-list">
+        <p>Aucun resultat</p>
     </div>
 </template>
 
@@ -28,7 +31,8 @@ export default {
         },
         listHeader: {
             type: Object,
-            required: false
+            required: false,
+            default: undefined
         }
     },
     data() { return {
@@ -49,6 +53,11 @@ export default {
                 return filteredList;
             }
             return this.items;
+        }
+    },
+    computed: {
+        unsuccesfullSearch: function() {
+            return this.searchBar != "" && Object.keys(this.filteredList()).length == 0;
         }
     }
 }
@@ -78,6 +87,25 @@ export default {
 }
 
 .error {
-  background-color: tomato;
+    background-color: tomato;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.empty-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.empty-list > * {
+    background-color: var(--secondary);
+    border-radius: 5px;
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 60%;
+    max-width: 800px;
 }
 </style>
