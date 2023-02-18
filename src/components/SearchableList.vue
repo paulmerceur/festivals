@@ -1,14 +1,17 @@
 <template>
-    <div v-if="Object.keys(items).length != 0" class="list">
-        <input type="text" id="search-bar" v-model="searchBar" placeholder="Rechercher...">
-        <ListItem v-if="listHeader!=undefined && filteredList()" :item="listHeader" :type="type" :isHeader=true></ListItem>
-        <ListItem v-for="item in filteredList()" :key="item.id" :item="item" :type="type"></ListItem>
-        <div class="error" v-if="unsuccesfullSearch">
-            <p>Aucun resultat de correspond a votre recherche</p>
+    <div class="page">
+        <button v-if="canCreateThisType" @click="goToCreationPage" class="basic-button"> Ajouter un {{ type }}</button>
+        <div v-if="Object.keys(items).length != 0" class="list">
+            <input type="text" id="search-bar" v-model="searchBar" placeholder="Rechercher...">
+            <ListItem v-if="listHeader!=undefined && filteredList()" :item="listHeader" :type="type" :isHeader=true></ListItem>
+            <ListItem v-for="item in filteredList()" :key="item.id" :item="item" :type="type"></ListItem>
+            <div class="error" v-if="unsuccesfullSearch">
+                <p>Aucun resultat de correspond a votre recherche</p>
+            </div>
         </div>
-    </div>
-    <div v-else class="empty-list">
-        <p>Aucun resultat</p>
+        <div v-else class="empty-list">
+            <p>Aucun resultat</p>
+        </div>
     </div>
 </template>
 
@@ -53,17 +56,34 @@ export default {
                 return filteredList;
             }
             return this.items;
+        },
+        goToCreationPage: function() {
+            this.$router.push({ path: 'create-' + this.type });
         }
     },
     computed: {
         unsuccesfullSearch: function() {
             return this.searchBar != "" && Object.keys(this.filteredList()).length == 0;
+        },
+        canCreateThisType: function() {
+            return this.type == 'jeu' || this.type == 'benevole';
         }
     }
 }
 </script>
 
 <style>
+.page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-button:hover {
+    background-color: var(--tertiary);
+}
+
 .list {
     width: 100%;
     display: flex;

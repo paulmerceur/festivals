@@ -8,6 +8,7 @@
             <ListItem :item="listHeader" :type="'jeu'" :isHeader=true></ListItem>
             <ListItem v-for="jeu in jeux" :key="jeu.id" :item="jeu" :type="'jeu'"></ListItem>
         </div>
+        <button class="basic-button" @click="goToModifyBenevole">Modifier</button>
     </div>
 </template>
 
@@ -38,6 +39,9 @@ export default {
                 this.getJeux();
             });
         },
+        goToModifyBenevole: function() {
+            this.$router.push({path: '/modify-benevole/' + this.currentBenevoleId});
+        }
     },
     mounted() {
         this.currentBenevoleId = this.$router.currentRoute._value.params.id;

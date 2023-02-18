@@ -3,6 +3,7 @@
         <PageHeader></PageHeader>
         <h1 class="nom">{{jeu.nom}}</h1>
         <h2 class="type">Type de jeu: {{jeu.type}}</h2>
+        <button class="basic-button" @click="goToModifyJeu">Modifier</button>
     </div>
 </template>
 
@@ -23,6 +24,9 @@ export default {
                 this.jeu = data[0];
             });
         },
+        goToModifyJeu: function() {
+            this.$router.push({path: '/modify-jeu/' + this.currentJeuId});
+        }
     },
     mounted() {
         this.currentJeuId = this.$router.currentRoute._value.params.id;
