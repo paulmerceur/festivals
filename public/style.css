@@ -1,4 +1,5 @@
 /* Color palette */
+
 :root {
     --white: #FFFFFF;
     --gray: #8d8d8d;
@@ -14,10 +15,67 @@
     --box-shadow-cool: #33597966 5px 5px, #3359794d 10px 10px, #33597933 15px 15px, #3359791a 20px 20px, #3359790d 25px 25px; */
 }
 
+
 /* Style variables */
+
 :root {
     --primary: var(--white);
     --secondary: var(--light-gray);
     --tertiary: var(--gray);
     --font-family: 'montserrat';
+}
+
+
+/* Global styles */
+
+* {
+    font-family: var(--font-family), sans-serif;
+    color: black;
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: var(--primary);
+}
+
+.basic-button {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: var(--secondary);
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    cursor: pointer;
+}
+.basic-button:hover {
+    background-color: var(--tertiary);
+}
+
+h1, h2 {
+    margin-top: 10px;
+}
+
+
+/* Forms */
+
+.form {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.form-group {
+    margin: 20px;
+    text-align: left;
+}
+
+.form-control {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }

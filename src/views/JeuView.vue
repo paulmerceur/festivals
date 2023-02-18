@@ -52,9 +52,3 @@ export default {
     }
 }
 </script>
-
-<style>
-h1, h2 {
-    margin-top: 10px;
-}
-</style>

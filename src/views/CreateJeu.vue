@@ -57,28 +57,3 @@ export default {
     }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-.form {
-    margin: 0 auto;
-    width: 50%;
-}
-
-.form-group {
-    margin: 20px;
-    text-align: left;
-}
-
-.form-control {
-    margin-top: 10px;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-
-</style>

@@ -62,34 +62,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-    .page {
-        width: 100%;
-        text-align: center;
-    }
-
-    .nom {
-        margin-top: 10px;
-    }
-
-    .jeux {
-        margin-top: 50px;
-    }
-
-    .home {
-        text-align: center;
-        margin-top: 60px;
-    }
-
-    .logo {
-        width: 100px;
-        height: 100px;
-        margin: 40px auto;
-    }
-
-    .logo img {
-        width: 100%;
-    }
-</style>
