@@ -4,7 +4,10 @@
         <h1 class="nom">{{jeu.nom}}</h1>
         <h2 class="type">Type de jeu: {{jeu.type}}</h2>
         <h2 class="zone">Zone: {{jeu.zone}}</h2>
-        <button class="basic-button" @click="goToModifyJeu">Modifier</button>
+        <div class="buttons">
+            <button class="basic-button" @click="goToModifyJeu">Modifier</button>
+            <button class="basic-button" @click="deleteJeu">Supprimer</button>
+        </div>
     </div>
 </template>
 
@@ -28,6 +31,19 @@ export default {
         },
         goToModifyJeu: function() {
             this.$router.push({path: '/modify-jeu/' + this.currentJeuId});
+        },
+        deleteJeu: async function() {
+            // TODO: Add a confirmation popup
+            await fetch(this.$root.base_url + "jeux/" + this.currentJeuId, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                if (res.status == 200) {
+                    this.$router.push({path: '/jeux'});
+                }
+            });
         }
     },
     mounted() {

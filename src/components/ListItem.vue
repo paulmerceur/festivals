@@ -35,7 +35,7 @@ export default {
                         creneau: this.item.creneau
                     }
                     break;
-                case 'benevole':
+                case 'benevole' || 'benevole-jeu':
                     this.displayedItem = {
                         prenom: this.item.prenom,
                         nom: this.item.nom,
@@ -60,6 +60,10 @@ export default {
             }
             // Remove undefined properties
             Object.keys(this.displayedItem).forEach(key => this.displayedItem[key] === undefined ? delete this.displayedItem[key] : {});
+            // Remove id if it exists
+            if (this.displayedItem.id) {
+                delete this.displayedItem.id;
+            }
         },
         // Go to the item page
         goToItem() {

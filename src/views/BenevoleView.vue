@@ -8,7 +8,10 @@
             <ListItem :item="listHeader" :type="'jeu'" :isHeader=true></ListItem>
             <ListItem v-for="jeu in jeux" :key="jeu.id" :item="jeu" :type="'jeu'"></ListItem>
         </div>
-        <button class="basic-button" @click="goToModifyBenevole">Modifier</button>
+        <div class="buttons">
+            <button class="basic-button" @click="goToModifyBenevole">Modifier</button>
+            <button class="basic-button" @click="deleteBenevole">Supprimer</button>
+        </div>
     </div>
 </template>
 
@@ -41,6 +44,19 @@ export default {
         },
         goToModifyBenevole: function() {
             this.$router.push({path: '/modify-benevole/' + this.currentBenevoleId});
+        },
+        deleteBenevole: async function() {
+            // TODO: Add a confirmation popup
+            await fetch(this.$root.base_url + "benevoles/" + this.currentBenevoleId, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                if (res.status == 200) {
+                    this.$router.push({path: '/benevoles'});
+                }
+            });
         }
     },
     mounted() {

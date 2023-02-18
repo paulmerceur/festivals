@@ -5,7 +5,7 @@
         <h3 class="jeux">Liste des jeux</h3>
         <SearchableList :items="jeux" :type="'jeu-par-zone'" :listHeader="jeuxHeader"></SearchableList>
         <h3 class="benevoles">Liste des bénévoles</h3>
-        <SearchableList :items="benevoles" :type="'benevole'" :listHeader="benevolesHeader"></SearchableList>
+        <SearchableList :items="benevoles" :type="'benevole-par-zone'" :listHeader="benevolesHeader"></SearchableList>
     </div>
 </template>
 
