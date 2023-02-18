@@ -16,7 +16,7 @@ export default {
 },
     data() { return {
         benevoles: [],
-        listHeader: {prenom: "Nom", nom: "Type", email: "Zone"}
+        listHeader: {prenom: "Prénom", nom: "Nom", email: "Email"}
     }},
     methods: {
         getBenevoles: async function() {

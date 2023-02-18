@@ -31,7 +31,7 @@ export default {
                     this.displayedItem = {
                         nom: this.item.nom,
                         type: this.item.type,
-                        zone: this.zone != undefined ? this.item.zone.nom : undefined,
+                        zone:  this.item.zone.nom,
                         creneau: this.item.creneau
                     }
                     break;
@@ -48,6 +48,13 @@ export default {
                         nom: this.item.nom
                     }
                     break;
+                case 'jeu-par-zone':
+                this.displayedItem = {
+                        nom: this.item.nom,
+                        type: this.item.type,
+                        creneau: this.item.creneau
+                    }
+                    break;
                 default:
                     this.displayedItem = this.item;
             }
@@ -62,6 +69,7 @@ export default {
         }
     },
     created() {
+        console.log(this.type);
         this.getDisplayedItem();
     }
 

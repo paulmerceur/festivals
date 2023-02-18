@@ -3,22 +3,19 @@
         <PageHeader></PageHeader>
         <h1 class="nom">{{zone.nom}}</h1>
         <h3 class="jeux">Liste des jeux</h3>
-        <div class="list">
-            <ListItem :item="listHeader" :type="'jeu'" :isHeader=true></ListItem>
-            <ListItem v-for="jeu in jeux" :key="jeu.id" :item="jeu" :type="'jeu'"></ListItem>
-        </div>
+        <SearchableList :items="jeux" :type="'jeu-par-zone'" :listHeader="listHeader"></SearchableList>
     </div>
 </template>
 
 <script>
-import PageHeader from '@/components/PageHeader.vue'
-import ListItem from '../components/ListItem.vue'
+import PageHeader from '@/components/PageHeader.vue';
+import SearchableList from '@/components/SearchableList.vue';
 export default {
     name: 'ZoneView',
     components: {
-        ListItem,
-        PageHeader
-    },
+    PageHeader,
+    SearchableList
+},
     data() { return {
         jeux: [],
         listHeader: {nom: "Nom", type: "Type"},
