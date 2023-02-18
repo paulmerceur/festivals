@@ -29,18 +29,18 @@ export default {
     methods: {
         getZone: async function() {
             await fetch(this.$root.base_url + "zones/" + this.currentZoneId).then(res => res.json()).then(data => {
-                this.zone = data[0];
+                this.zone = data;
                 this.getJeux();
                 this.getBenevoles();
             });
         },
         getJeux: async function() {
-            await fetch(this.$root.base_url + "jeux/zone/" + this.zone.id ).then(res => res.json()).then(data => {
+            await fetch(this.$root.base_url + "jeux/zone/" + this.currentZoneId ).then(res => res.json()).then(data => {
                 this.jeux = data;
             });
         },
         getBenevoles: async function() {
-            await fetch(this.$root.base_url + "benevoles/zone/" + this.zone.id ).then(res => res.json()).then(data => {
+            await fetch(this.$root.base_url + "benevoles/zone/" + this.currentZoneId ).then(res => res.json()).then(data => {
                 this.benevoles = data;
                 if (this.benevoles[0] != undefined) {
                     if (this.benevoles[0].benevoles != undefined) {

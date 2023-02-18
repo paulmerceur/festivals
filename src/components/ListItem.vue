@@ -63,8 +63,9 @@ export default {
         },
         // Go to the item page
         goToItem() {
+            const type = this.type === 'jeu' ? 'jeux' : this.type + 's';
             if (!this.isHeader) {
-                this.$router.push({ path: '/' + this.type + '/' + this.item.id });
+                this.$router.push({ path: '/' + type + '/' + this.item.id });
             }
         }
     },

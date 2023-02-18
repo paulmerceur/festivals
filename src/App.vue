@@ -39,4 +39,7 @@ body {
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     cursor: pointer;
 }
+.basic-button:hover {
+    background-color: var(--tertiary);
+}
 </style>

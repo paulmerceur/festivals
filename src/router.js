@@ -19,7 +19,7 @@ const routes = [
       },
     {
         name: 'JeuView',
-        path: '/jeu/:id',
+        path: '/jeux/:id',
         component: JeuView,
     },
     {
@@ -29,7 +29,7 @@ const routes = [
     },
     {
         name: 'BenevoleView',
-        path: '/benevole/:id',
+        path: '/benevoles/:id',
         component: BenevoleView,
     },
     {
@@ -39,7 +39,7 @@ const routes = [
     },
     {
         name: 'ZoneView',
-        path: '/zone/:id',
+        path: '/zones/:id',
         component: ZoneView,
     },
     {

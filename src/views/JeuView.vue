@@ -3,6 +3,7 @@
         <PageHeader></PageHeader>
         <h1 class="nom">{{jeu.nom}}</h1>
         <h2 class="type">Type de jeu: {{jeu.type}}</h2>
+        <h2 class="zone">Zone: {{jeu.zone}}</h2>
         <button class="basic-button" @click="goToModifyJeu">Modifier</button>
     </div>
 </template>
@@ -21,7 +22,8 @@ export default {
     methods: {
         getJeu: async function() {
             await fetch(this.$root.base_url + "jeux/" + this.currentJeuId).then(res => res.json()).then(data => {
-                this.jeu = data[0];
+                this.jeu = data;
+                this.jeu.zone = data.zone.nom;
             });
         },
         goToModifyJeu: function() {
@@ -36,36 +38,7 @@ export default {
 </script>
 
 <style>
-
-    .page {
-        width: 100%;
-        text-align: center;
-    }
-
-    .nom {
-        margin-top: 10px;
-    }
-
-    .type {
-        margin-top: 10px;
-    }
-
-    .benevoles {
-        margin-top: 50px;
-    }
-
-    .home {
-        text-align: center;
-        margin-top: 60px;
-    }
-
-    .logo {
-        width: 100px;
-        height: 100px;
-        margin: 40px auto;
-    }
-
-    .logo img {
-        width: 100%;
-    }
+h1, h2 {
+    margin-top: 10px;
+}
 </style>

@@ -22,20 +22,20 @@ export default {
         PageHeader
     },
     data() { return {
-        jeux: [],
-        listHeader: {nom: "Nom", zone: {nom: "Zone"}, creneau: "Créneau"},
         currentBenevoleId: "",
-        benevole: {}
+        benevole: {},
+        jeux: [],
+        listHeader: {nom: "Nom", zone: {nom: "Zone"}, creneau: "Créneau"}
     }},
     methods: {
         getJeux: async function() {
-            await fetch(this.$root.base_url + "jeux/benevole/" + this.benevole.id ).then(res => res.json()).then(data => {
+            await fetch(this.$root.base_url + "jeux/benevole/" + this.currentBenevoleId ).then(res => res.json()).then(data => {
                 this.jeux = data;
             });
         },
         getBenevole: async function() {
             await fetch(this.$root.base_url + "benevoles/" + this.currentBenevoleId).then(res => res.json()).then(data => {
-                this.benevole = data[0];
+                this.benevole = data;
                 this.getJeux();
             });
         },
