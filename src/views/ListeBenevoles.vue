@@ -1,22 +1,19 @@
 <template>
     <div class="page">
         <PageHeader></PageHeader>
-        <div class="list">
-            <ListItem :item="listHeader" :type="'benevole'" :isHeader=true></ListItem>
-            <ListItem v-for="benevole in benevoles" :key="benevole.id" :item="benevole" :type="'benevole'"></ListItem>
-        </div>
+        <SearchableList :items="benevoles" :type="'benevole'" :listHeader="listHeader"></SearchableList>
     </div>
 </template>
 
 <script>
-import ListItem from '../components/ListItem.vue'
 import PageHeader from '@/components/PageHeader.vue';
+import SearchableList from '@/components/SearchableList.vue';
 export default {
     name: 'ListeBenevoles',
     components: {
-        ListItem,
-        PageHeader
-    },
+    PageHeader,
+    SearchableList
+},
     data() { return {
         benevoles: [],
         listHeader: {prenom: "Nom", nom: "Type", email: "Zone"}
@@ -33,12 +30,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-</style>

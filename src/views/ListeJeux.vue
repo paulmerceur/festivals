@@ -1,20 +1,17 @@
 <template>
     <div class="page">
         <PageHeader></PageHeader>
-        <div class="list">
-            <ListItem :item="listHeader" :type="'jeu'" :isHeader=true></ListItem>
-            <ListItem v-for="jeu in jeux" :key="jeu.id" :item="jeu" :type="'jeu'"></ListItem>
-        </div>
+        <SearchableList :items="jeux" :type="'jeu'" :listHeader="listHeader"></SearchableList>
     </div>
 </template>
 
 <script>
-import ListItem from '../components/ListItem.vue'
 import PageHeader from '@/components/PageHeader.vue';
+import SearchableList from '@/components/SearchableList.vue';
 export default {
     name: 'ListeJeux',
     components: {
-        ListItem,
+        SearchableList,
         PageHeader
     },
     data() { return {
@@ -33,12 +30,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-</style>

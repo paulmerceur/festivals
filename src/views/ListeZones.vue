@@ -2,21 +2,19 @@
     <div class="page">
         <PageHeader></PageHeader>
         <img src="@/assets/carte_festival.png" class="image" alt="Carte du festival">
-        <div class="list">
-            <ListItem v-for="zone in zones" :key="zone.id" :item="zone" :type="'zone'"></ListItem>
-        </div>
+        <SearchableList :items="zones" :type="'zone'"></SearchableList>
     </div>
 </template>
 
 <script>
-import ListItem from '../components/ListItem.vue'
 import PageHeader from '@/components/PageHeader.vue';
+import SearchableList from '@/components/SearchableList.vue';
 export default {
     name: 'ListeZones',
     components: {
-        ListItem,
-        PageHeader
-    },
+    PageHeader,
+    SearchableList
+},
     data() { return {
         zones: []
     }},
