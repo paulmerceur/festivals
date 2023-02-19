@@ -3,52 +3,48 @@
         <PageHeader></PageHeader>
         <h1 class="nom">{{jeu.nom}}</h1>
         <h2 class="type">Type de jeu: {{jeu.type}}</h2>
-        <h3 class="benevoles">Liste des bénévoles</h3>
-        <div class="list">
-            <ListItem :item="listHeader" :type="'benevole'" :isHeader=true></ListItem>
-            <ListItem v-for="benevole in benevoles" :key="benevole.id" :item="benevole" :type="'benevole'"></ListItem>
+        <h2 class="zone">Zone: {{jeu.zone}}</h2>
+        <div class="buttons">
+            <button class="basic-button" @click="goToModifyJeu">Modifier</button>
+            <button class="basic-button" @click="deleteJeu">Supprimer</button>
         </div>
     </div>
 </template>
 
 <script>
-import ListItem from '../components/ListItem.vue'
 import PageHeader from '@/components/PageHeader.vue';
 export default {
     name: 'JeuView',
     components: {
-        ListItem,
         PageHeader
     },
     data() { return {
-        benevoles: [],
-        listHeader: {prenom: "Prénom", nom: "Nom", email: "Email", creneau: "Créneau"},
         currentJeuId: "",
         jeu: {}
     }},
     methods: {
-        getBenevoles: async function() {
-            await fetch(this.$root.base_url + "benevoles/zone/" + this.jeu.zone.id ).then(res => res.json()).then(data => {
-                this.benevoles = data;
-                if (this.benevoles[0] != undefined) {
-                    if (this.benevoles[0].benevoles != undefined) {
-                        this.benevoles.forEach(benevole => {
-                            benevole.id = benevole.benevoles.id;
-                            benevole.prenom = benevole.benevoles.prenom;
-                            benevole.nom = benevole.benevoles.nom;
-                            benevole.email = benevole.benevoles.email;
-                            delete benevole.benevoles;
-                        });
-                    }
-                }
-            });
-        },
         getJeu: async function() {
             await fetch(this.$root.base_url + "jeux/" + this.currentJeuId).then(res => res.json()).then(data => {
-                this.jeu = data[0];
-                this.getBenevoles();
+                this.jeu = data;
+                this.jeu.zone = data.zone.nom;
             });
         },
+        goToModifyJeu: function() {
+            this.$router.push({path: '/modify-jeu/' + this.currentJeuId});
+        },
+        deleteJeu: async function() {
+            // TODO: Add a confirmation popup
+            await fetch(this.$root.base_url + "jeux/" + this.currentJeuId, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                if (res.status == 200) {
+                    this.$router.push({path: '/jeux'});
+                }
+            });
+        }
     },
     mounted() {
         this.currentJeuId = this.$router.currentRoute._value.params.id;
@@ -56,38 +52,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-    .page {
-        width: 100%;
-        text-align: center;
-    }
-
-    .nom {
-        margin-top: 10px;
-    }
-
-    .type {
-        margin-top: 10px;
-    }
-
-    .benevoles {
-        margin-top: 50px;
-    }
-
-    .home {
-        text-align: center;
-        margin-top: 60px;
-    }
-
-    .logo {
-        width: 100px;
-        height: 100px;
-        margin: 40px auto;
-    }
-
-    .logo img {
-        width: 100%;
-    }
-</style>

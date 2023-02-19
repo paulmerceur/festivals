@@ -1,21 +1,20 @@
 <template>
     <div class="page">
         <PageHeader></PageHeader>
-        <div class="list">
-            <ListItem v-for="zone in zones" :key="zone.id" :item="zone" :type="'zone'"></ListItem>
-        </div>
+        <img src="@/assets/carte_festival.png" class="image" alt="Carte du festival">
+        <SearchableList :items="zones" :type="'zone'"></SearchableList>
     </div>
 </template>
 
 <script>
-import ListItem from '../components/ListItem.vue'
 import PageHeader from '@/components/PageHeader.vue';
+import SearchableList from '@/components/SearchableList.vue';
 export default {
     name: 'ListeZones',
     components: {
-        ListItem,
-        PageHeader
-    },
+    PageHeader,
+    SearchableList
+},
     data() { return {
         zones: []
     }},
@@ -38,5 +37,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.image {
+  object-fit: cover;
 }
 </style>

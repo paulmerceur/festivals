@@ -3,41 +3,63 @@
         <PageHeader></PageHeader>
         <h1 class="nom">{{benevole.prenom}} {{benevole.nom}}</h1>
         <h2 class="email">{{benevole.email}}</h2>
-        <h3 class="jeux">Liste des jeux</h3>
-        <div class="list">
-            <ListItem :item="listHeader" :type="'jeu'" :isHeader=true></ListItem>
-            <ListItem v-for="jeu in jeux" :key="jeu.id" :item="jeu" :type="'jeu'"></ListItem>
+        <SearchableList :items="activites" :type="'zone-creneau'" :listHeader="listHeader" :title="'Liste des activités'"></SearchableList>
+        <div class="buttons">
+            <button class="basic-button" @click="goToModifyBenevole">Modifier</button>
+            <button class="basic-button" @click="deleteBenevole">Supprimer</button>
         </div>
     </div>
 </template>
 
 <script>
 import PageHeader from '@/components/PageHeader.vue'
-import ListItem from '../components/ListItem.vue'
+import SearchableList from '@/components/SearchableList.vue'
 export default {
     name: 'BenevoleView',
     components: {
-        ListItem,
+        SearchableList,
         PageHeader
     },
     data() { return {
-        jeux: [],
-        listHeader: {nom: "Nom", zone: {nom: "Zone"}, creneau: "Créneau"},
         currentBenevoleId: "",
-        benevole: {}
+        benevole: {},
+        activites: [],
+        listHeader: {zone: "Zone", creneau: "Créneau"}
     }},
     methods: {
-        getJeux: async function() {
-            await fetch(this.$root.base_url + "jeux/benevole/" + this.benevole.id ).then(res => res.json()).then(data => {
-                this.jeux = data;
+        getActivites: async function() {
+            await fetch(this.$root.base_url + "creneaux/benevole/" + this.currentBenevoleId ).then(res => res.json()).then(data => {
+                this.activites = data;
+                if (this.activites.length != 0) {
+                    this.activites.forEach(activite => {
+                        activite.id = activite.zone.id;
+                        activite.zone = activite.zone.nom;
+                    });
+                }
             });
         },
         getBenevole: async function() {
             await fetch(this.$root.base_url + "benevoles/" + this.currentBenevoleId).then(res => res.json()).then(data => {
-                this.benevole = data[0];
-                this.getJeux();
+                this.benevole = data;
+                this.getActivites();
             });
         },
+        goToModifyBenevole: function() {
+            this.$router.push({path: '/modify-benevole/' + this.currentBenevoleId});
+        },
+        deleteBenevole: async function() {
+            // TODO: Add a confirmation popup
+            await fetch(this.$root.base_url + "benevoles/" + this.currentBenevoleId, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                if (res.status == 200) {
+                    this.$router.push({path: '/benevoles'});
+                }
+            });
+        }
     },
     mounted() {
         this.currentBenevoleId = this.$router.currentRoute._value.params.id;
@@ -45,38 +67,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-    .page {
-        width: 100%;
-        text-align: center;
-    }
-
-    .nom {
-        margin-top: 10px;
-    }
-
-    .email {
-        margin-top: 10px;
-    }
-
-    .jeux {
-        margin-top: 50px;
-    }
-
-    .home {
-        text-align: center;
-        margin-top: 60px;
-    }
-
-    .logo {
-        width: 100px;
-        height: 100px;
-        margin: 40px auto;
-    }
-
-    .logo img {
-        width: 100%;
-    }
-</style>

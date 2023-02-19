@@ -5,6 +5,11 @@ import ListeBenevoles from "@/views/ListeBenevoles.vue";
 import BenevoleView from "@/views/BenevoleView.vue";
 import ListeZones from "@/views/ListeZones.vue";
 import ZoneView from "@/views/ZoneView.vue";
+import AddBenevoleZone from "@/views/AddBenevoleZone.vue";
+import CreateJeu from "@/views/CreateJeu.vue";
+import CreateBenevole from "@/views/CreateBenevole.vue";
+import ModifyJeu from "@/views/ModifyJeu.vue";
+import ModifyBenevole from "@/views/ModifyBenevole.vue";
 
 const routes = [
     { 
@@ -15,7 +20,7 @@ const routes = [
       },
     {
         name: 'JeuView',
-        path: '/jeu/:id',
+        path: '/jeux/:id',
         component: JeuView,
     },
     {
@@ -25,7 +30,7 @@ const routes = [
     },
     {
         name: 'BenevoleView',
-        path: '/benevole/:id',
+        path: '/benevoles/:id',
         component: BenevoleView,
     },
     {
@@ -35,9 +40,34 @@ const routes = [
     },
     {
         name: 'ZoneView',
-        path: '/zone/:id',
+        path: '/zones/:id',
         component: ZoneView,
-    }
+    },
+    {
+        name: 'AddBenevoleZone',
+        path: '/zones/:id/add-benevole',
+        component: AddBenevoleZone,
+    },
+    {
+        name: 'CreateJeu',
+        path: '/create-jeu',
+        component: CreateJeu,
+    },
+    {
+        name: 'CreateBenevole',
+        path: '/create-benevole',
+        component: CreateBenevole,
+    },
+    {
+        name: 'ModifyJeu',
+        path: '/modify-jeu/:id',
+        component: ModifyJeu,
+    },
+    {
+        name: 'ModifyBenevole',
+        path: '/modify-benevole/:id',
+        component: ModifyBenevole,
+    },
 ]
 
 const router = createRouter({
