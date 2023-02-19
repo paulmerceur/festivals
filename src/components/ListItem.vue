@@ -31,11 +31,17 @@ export default {
                     this.displayedItem = {
                         nom: this.item.nom,
                         type: this.item.type,
-                        zone:  this.item.zone.nom,
-                        creneau: this.item.creneau
+                        zone:  this.item.zone.nom
                     }
                     break;
-                case 'benevole' || 'benevole-jeu':
+                case 'benevole':
+                    this.displayedItem = {
+                        prenom: this.item.prenom,
+                        nom: this.item.nom,
+                        email: this.item.email
+                    }
+                    break;
+                case 'benevole-creneau':
                     this.displayedItem = {
                         prenom: this.item.prenom,
                         nom: this.item.nom,
@@ -51,8 +57,7 @@ export default {
                 case 'jeu-par-zone':
                 this.displayedItem = {
                         nom: this.item.nom,
-                        type: this.item.type,
-                        creneau: this.item.creneau
+                        type: this.item.type
                     }
                     break;
                 default:
@@ -89,7 +94,7 @@ export default {
     padding: 10px;
     padding-left: 50px;
     padding-right: 50px;
-    margin: 10px 0;
+    margin: 5px 0;
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
     display: flex;
     flex-direction: row;
@@ -103,6 +108,7 @@ export default {
 
 .header {
     background-color: var(--tertiary);
+    margin: 10px 0;
     font-weight: bold;
     cursor: default;
 }

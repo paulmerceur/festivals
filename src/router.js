@@ -5,6 +5,7 @@ import ListeBenevoles from "@/views/ListeBenevoles.vue";
 import BenevoleView from "@/views/BenevoleView.vue";
 import ListeZones from "@/views/ListeZones.vue";
 import ZoneView from "@/views/ZoneView.vue";
+import AddBenevoleZone from "@/views/AddBenevoleZone.vue";
 import CreateJeu from "@/views/CreateJeu.vue";
 import CreateBenevole from "@/views/CreateBenevole.vue";
 import ModifyJeu from "@/views/ModifyJeu.vue";
@@ -41,6 +42,11 @@ const routes = [
         name: 'ZoneView',
         path: '/zones/:id',
         component: ZoneView,
+    },
+    {
+        name: 'AddBenevoleZone',
+        path: '/zones/:id/add-benevole',
+        component: AddBenevoleZone,
     },
     {
         name: 'CreateJeu',

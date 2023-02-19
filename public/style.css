@@ -39,8 +39,15 @@ body {
     background-color: var(--primary);
 }
 
+.page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .basic-button {
-    margin: 20px;
+    margin: 10px;
     padding: 10px 20px;
     background-color: var(--secondary);
     border: none;
@@ -63,6 +70,7 @@ h1, h2 {
 .form {
     margin: 0 auto;
     width: 50%;
+    text-align: center;
 }
 
 .form-group {

@@ -1,8 +1,8 @@
 <template>
-    <div class="page">
-        <button v-if="canCreateThisType" @click="goToCreationPage" class="basic-button"> Ajouter un {{ type }}</button>
-        <div v-if="Object.keys(items).length != 0" class="list">
-            <input type="text" id="search-bar" v-model="searchBar" placeholder="Rechercher...">
+    <div class="page list-component">
+        <input v-if="!emptyList" type="text" id="search-bar" v-model="searchBar" placeholder="Rechercher...">
+        <button v-if="canCreateThisType" @click="goToCreationPage" class="basic-button">Ajouter un  {{ textButton }} </button>
+        <div v-if="!emptyList" class="list">
             <ListItem v-if="listHeader!=undefined && filteredList()" :item="listHeader" :type="type" :isHeader=true></ListItem>
             <ListItem v-for="item in filteredList()" :key="item.id" :item="item" :type="type"></ListItem>
             <div class="error" v-if="unsuccesfullSearch">
@@ -10,7 +10,7 @@
             </div>
         </div>
         <div v-else class="empty-list">
-            <p>Aucun resultat</p>
+            <p>Aucun {{ textButton }}</p>
         </div>
     </div>
 </template>
@@ -58,6 +58,10 @@ export default {
             return this.items;
         },
         goToCreationPage: function() {
+            if (this.type == 'benevole-creneau') {
+                this.$router.push({ path: this.$route.params.id + '/add-benevole' });
+                return;
+            }
             this.$router.push({ path: 'create-' + this.type });
         }
     },
@@ -65,19 +69,31 @@ export default {
         unsuccesfullSearch: function() {
             return this.searchBar != "" && Object.keys(this.filteredList()).length == 0;
         },
+        emptyList: function() {
+            return Object.keys(this.items).length == 0;
+        },
         canCreateThisType: function() {
-            return this.type == 'jeu' || this.type == 'benevole';
+            return this.type == 'jeu' || this.type == 'benevole' || this.type == 'benevole-creneau';
+        },
+        textButton: function() {
+            switch(this.type) {
+                case 'jeu':
+                    return 'jeu';
+                case 'benevole':
+                    return 'bénévole';
+                case 'benevole-creneau':
+                    return 'bénévole';
+                default:
+                    return '';
+            }
         }
     }
 }
 </script>
 
 <style>
-.page {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.list-component {
+    margin-top: 100px;
 }
 
 .create-button:hover {
@@ -94,7 +110,7 @@ export default {
 #search-bar {
   display: block;
   width: 350px;
-  margin: 20px auto;
+  margin: 5px auto;
   padding: 10px 45px;
   background: white url("../assets/search-icon.png") no-repeat 15px center;
   background-size: 15px 15px;
@@ -106,19 +122,20 @@ export default {
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+
+.error, .empty-list {
+    padding: 10px;
+}
 .error {
     background-color: tomato;
     border-radius: 5px;
-    padding: 10px;
 }
-
 .empty-list {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .empty-list > * {
     background-color: var(--secondary);
     border-radius: 5px;
