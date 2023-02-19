@@ -1,5 +1,7 @@
 <template>
     <div class="page list-component">
+        <!--title-->
+        <h1 v-if="title">{{ title }}</h1>
         <input v-if="!emptyList" type="text" id="search-bar" v-model="searchBar" placeholder="Rechercher...">
         <button v-if="canCreateThisType" @click="goToCreationPage" class="basic-button">Ajouter un  {{ textButton }} </button>
         <div v-if="!emptyList" class="list">
@@ -36,6 +38,10 @@ export default {
             type: Object,
             required: false,
             default: undefined
+        },
+        title: {
+            type: String,
+            required: false
         }
     },
     data() { return {
@@ -91,13 +97,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
 .list-component {
     margin-top: 100px;
-}
-
-.create-button:hover {
-    background-color: var(--tertiary);
 }
 
 .list {

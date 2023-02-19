@@ -54,6 +54,12 @@ export default {
                         nom: this.item.nom
                     }
                     break;
+                case 'zone-creneau':
+                    this.displayedItem = {
+                        zone: this.item.zone,
+                        creneau: this.item.creneau
+                    }
+                    break;
                 case 'jeu-par-zone':
                 this.displayedItem = {
                         nom: this.item.nom,
@@ -63,6 +69,14 @@ export default {
                 default:
                     this.displayedItem = this.item;
             }
+
+            // Capitalize the first letter of each property (except for email)
+            Object.keys(this.displayedItem).forEach(key => {
+                if (key !== 'email' && this.displayedItem[key] !== undefined) {
+                    this.displayedItem[key] = this.displayedItem[key].charAt(0).toUpperCase() + this.displayedItem[key].slice(1);
+                }
+            });
+
             // Remove undefined properties
             Object.keys(this.displayedItem).forEach(key => this.displayedItem[key] === undefined ? delete this.displayedItem[key] : {});
             // Remove id if it exists
@@ -74,6 +88,16 @@ export default {
         goToItem() {
             const type = this.type === 'jeu' ? 'jeux' : this.type + 's';
             if (!this.isHeader) {
+                if (this.type === 'benevole-creneau') {
+                    this.$router.push({ path: '/benevoles/' + this.item.id });
+                    return;
+                } else if (this.type === 'zone-creneau') {
+                    this.$router.push({ path: '/zones/' + this.item.id });
+                    return;
+                } else if (this.type === 'jeu-par-zone') {
+                    this.$router.push({ path: '/jeux/' + this.item.id });
+                    return;
+                }
                 this.$router.push({ path: '/' + type + '/' + this.item.id });
             }
         }

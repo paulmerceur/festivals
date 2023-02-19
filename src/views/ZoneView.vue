@@ -2,10 +2,8 @@
     <div class="page">
         <PageHeader></PageHeader>
         <h1 class="nom">{{zone.nom}}</h1>
-        <h3 class="jeux">Liste des jeux</h3>
-        <SearchableList :items="jeux" :type="'jeu-par-zone'" :listHeader="jeuxHeader"></SearchableList>
-        <h3 class="benevoles">Liste des bénévoles</h3>
-        <SearchableList :items="benevoles" :type="'benevole-creneau'" :listHeader="benevolesHeader"></SearchableList>
+        <SearchableList :items="jeux" :type="'jeu-par-zone'" :listHeader="jeuxHeader" :title="'Liste des jeux'"></SearchableList>
+        <SearchableList :items="benevoles" :type="'benevole-creneau'" :listHeader="benevolesHeader" :title="'Liste des bénévoles'"></SearchableList>
     </div>
 </template>
 
@@ -40,18 +38,16 @@ export default {
             });
         },
         getBenevoles: async function() {
-            await fetch(this.$root.base_url + "benevoles/zone/" + this.currentZoneId ).then(res => res.json()).then(data => {
+            await fetch(this.$root.base_url + "creneaux/zone/" + this.currentZoneId ).then(res => res.json()).then(data => {
                 this.benevoles = data;
-                if (this.benevoles[0] != undefined) {
-                    if (this.benevoles[0].benevoles != undefined) {
-                        this.benevoles.forEach(benevole => {
-                            benevole.id = benevole.benevoles.id;
-                            benevole.prenom = benevole.benevoles.prenom;
-                            benevole.nom = benevole.benevoles.nom;
-                            benevole.email = benevole.benevoles.email;
-                            delete benevole.benevoles;
-                        });
-                    }
+                if (this.benevoles.length != 0) {
+                    this.benevoles.forEach(benevole => {
+                        benevole.id = benevole.benevole.id;
+                        benevole.prenom = benevole.benevole.prenom;
+                        benevole.nom = benevole.benevole.nom;
+                        benevole.email = benevole.benevole.email;
+                        delete benevole.benevole;
+                    });
                 }
             });
         }

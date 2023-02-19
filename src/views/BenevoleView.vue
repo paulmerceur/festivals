@@ -3,11 +3,7 @@
         <PageHeader></PageHeader>
         <h1 class="nom">{{benevole.prenom}} {{benevole.nom}}</h1>
         <h2 class="email">{{benevole.email}}</h2>
-        <h3 class="jeux">Liste des jeux</h3>
-        <div class="list">
-            <ListItem :item="listHeader" :type="'jeu'" :isHeader=true></ListItem>
-            <ListItem v-for="jeu in jeux" :key="jeu.id" :item="jeu" :type="'jeu'"></ListItem>
-        </div>
+        <SearchableList :items="activites" :type="'zone-creneau'" :listHeader="listHeader" :title="'Liste des activités'"></SearchableList>
         <div class="buttons">
             <button class="basic-button" @click="goToModifyBenevole">Modifier</button>
             <button class="basic-button" @click="deleteBenevole">Supprimer</button>
@@ -17,29 +13,35 @@
 
 <script>
 import PageHeader from '@/components/PageHeader.vue'
-import ListItem from '../components/ListItem.vue'
+import SearchableList from '@/components/SearchableList.vue'
 export default {
     name: 'BenevoleView',
     components: {
-        ListItem,
+        SearchableList,
         PageHeader
     },
     data() { return {
         currentBenevoleId: "",
         benevole: {},
-        jeux: [],
-        listHeader: {nom: "Nom", zone: {nom: "Zone"}, creneau: "Créneau"}
+        activites: [],
+        listHeader: {zone: "Zone", creneau: "Créneau"}
     }},
     methods: {
-        getJeux: async function() {
-            await fetch(this.$root.base_url + "jeux/benevole/" + this.currentBenevoleId ).then(res => res.json()).then(data => {
-                this.jeux = data;
+        getActivites: async function() {
+            await fetch(this.$root.base_url + "creneaux/benevole/" + this.currentBenevoleId ).then(res => res.json()).then(data => {
+                this.activites = data;
+                if (this.activites.length != 0) {
+                    this.activites.forEach(activite => {
+                        activite.id = activite.zone.id;
+                        activite.zone = activite.zone.nom;
+                    });
+                }
             });
         },
         getBenevole: async function() {
             await fetch(this.$root.base_url + "benevoles/" + this.currentBenevoleId).then(res => res.json()).then(data => {
                 this.benevole = data;
-                this.getJeux();
+                this.getActivites();
             });
         },
         goToModifyBenevole: function() {
