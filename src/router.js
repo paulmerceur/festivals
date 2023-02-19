@@ -1,4 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
+
+import LoginPage from "@/views/LoginPage.vue";
 import ListeJeux from "@/views/ListeJeux.vue";
 import JeuView from "@/views/JeuView.vue";
 import ListeBenevoles from "@/views/ListeBenevoles.vue";
@@ -12,10 +14,15 @@ import ModifyJeu from "@/views/ModifyJeu.vue";
 import ModifyBenevole from "@/views/ModifyBenevole.vue";
 
 const routes = [
+    {
+        name: 'LoginPage',
+        path: '/',
+        component: LoginPage,
+    },
     { 
         name: 'ListeJeux',
-        path: '/',
-        alias: '/jeux', 
+        path: '/jeux',
+        alias: '/home', 
         component: ListeJeux,
       },
     {
