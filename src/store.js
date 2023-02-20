@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
-import bcrypt from 'bcryptjs';
 
 const instance = axios.create({
     baseURL: 'http://localhost:3000/'
@@ -11,6 +10,7 @@ export default createStore({
     state: {
         user: null,
         token: null,
+        isAdmin: false,
     },
     mutations: {
         SET_USER(state, user) {
@@ -25,21 +25,21 @@ export default createStore({
         CLEAR_TOKEN(state) {
             state.token = null
         },
+        SET_ADMIN(state, isAdmin) {
+            state.isAdmin = isAdmin
+        }
     },
     actions: {
         async login({ commit }, { email, password }) {
             try {
-                // Generate a hash of the password
-                const salt = await bcrypt.genSalt(10);
-                const hash = await bcrypt.hash(password, salt);
-
-                // Send the hash to the server
-                const response = await instance.post('auth/login', { email, password: hash })
+                const response = await instance.post('auth/login', { email, password })
                 const { session, user } = response.data
-                console.log(session)
-                console.log(user)
                 commit('SET_USER', user)
                 commit('SET_TOKEN', session)
+                
+                if (user.role === 'admin') {
+                    commit('SET_ADMIN', true)
+                }
             } catch (error) {
                 console.error(error)
                 throw error
@@ -48,12 +48,7 @@ export default createStore({
         },
         async register({ commit }, { email, password }) {
             try {
-                // Generate a hash of the password
-                const salt = await bcrypt.genSalt(10);
-                const hash = await bcrypt.hash(password, salt);
-
-                // Send the hash to the server
-                const response = await instance.post('auth/register', { email, password: hash })
+                const response = await instance.post('auth/register', { email, password })
                 const { user, token } = response.data
                 commit('SET_USER', user)
                 commit('SET_TOKEN', token)
@@ -67,6 +62,7 @@ export default createStore({
                 await instance.post('/logout')
                 commit('CLEAR_USER')
                 commit('CLEAR_TOKEN')
+                commit('SET_ADMIN', false)
             } catch (error) {
                 console.error(error)
                 throw error
@@ -77,5 +73,6 @@ export default createStore({
         isAuthenticated: state => !!state.token,
         user: state => state.user,
         token: state => state.token,
+        isAdmin: state => state.isAdmin
     },
 })
