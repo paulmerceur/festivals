@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
     name: 'RegisterForm',
     data() { return {
@@ -29,6 +31,7 @@ export default {
         error: ""
     } },
     methods: {
+        ...mapActions(['register']),
         register: async function() {
             if (!this.checkEmail()) {
                 this.error = "L'adresse email n'est pas valide";
@@ -37,13 +40,15 @@ export default {
                 this.error = "Le mot de passe doit contenir au moins 8 caractères";
                 return;
             }
-            const { data, error } = await this.$store.dispatch('register', {email: this.email, password: this.password});
-            if (error) {
-                console.log(error);
-                this.error = "L'adresse email est déjà utilisée";
-            } else {
-                console.log(data);
-                this.$router.push({name: '/home'});
+            try {
+                await this.$store.dispatch('register', {
+                email: this.email,
+                password: this.password,
+                });
+                // Redirect the user to the home page on successful login
+                this.$router.push('/home');
+            } catch (error) {
+                this.error = error.response.data.error;
             }
         },
         checkEmail: function() {

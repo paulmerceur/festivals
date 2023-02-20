@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
     name: 'LoginForm',
     data() { return {
@@ -29,14 +31,17 @@ export default {
         error: ""
     } },
     methods: {
+        ...mapActions(['login']),
         login: async function() {
-            const { data, error } = await this.$store.dispatch('login', {email: this.email, password: this.password});
-            if (error) {
-                console.log(error);
-                this.error = "L'adresse email ou le mot de passe est incorrect";
-            } else {
-                console.log(data);
-                this.$router.push({name: '/home'});
+            try {
+                await this.$store.dispatch('login', {
+                email: this.email,
+                password: this.password,
+                });
+                // Redirect the user to the home page on successful login
+                this.$router.push('/home');
+            } catch (error) {
+                this.error = error.response.data.error;
             }
         }
     }
