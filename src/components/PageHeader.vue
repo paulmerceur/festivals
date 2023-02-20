@@ -1,6 +1,9 @@
 <template>
     <div class="body">
         <div id="header">
+            <div id="logout">
+                <button class="basic-button" @click="logout">Déconnexion</button>
+            </div>
             <div @click="goHome" id="logo">
                 <img src="../assets/logo.png" alt="App logo" />
             </div>
@@ -20,9 +23,12 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     name: 'PageHeader',
     methods: {
+        ...mapActions(['logout']),
         goHome() {
             this.$router.push('/');
         },

@@ -59,7 +59,7 @@ export default createStore({
         },
         async logout({ commit }) {
             try {
-                await instance.post('/logout')
+                await instance.post('auth/logout')
                 commit('CLEAR_USER')
                 commit('CLEAR_TOKEN')
                 commit('SET_ADMIN', false)
