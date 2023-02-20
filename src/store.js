@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import bcrypt from 'bcryptjs';
 
 const instance = axios.create({
     baseURL: 'http://localhost:3000/'
@@ -28,8 +29,15 @@ export default createStore({
     actions: {
         async login({ commit }, { email, password }) {
             try {
-                const response = await instance.post('auth/login', { email, password })
+                // Generate a hash of the password
+                const salt = await bcrypt.genSalt(10);
+                const hash = await bcrypt.hash(password, salt);
+
+                // Send the hash to the server
+                const response = await instance.post('auth/login', { email, password: hash })
                 const { session, user } = response.data
+                console.log(session)
+                console.log(user)
                 commit('SET_USER', user)
                 commit('SET_TOKEN', session)
             } catch (error) {
@@ -40,7 +48,12 @@ export default createStore({
         },
         async register({ commit }, { email, password }) {
             try {
-                const response = await instance.post('auth/register', { email, password })
+                // Generate a hash of the password
+                const salt = await bcrypt.genSalt(10);
+                const hash = await bcrypt.hash(password, salt);
+
+                // Send the hash to the server
+                const response = await instance.post('auth/register', { email, password: hash })
                 const { user, token } = response.data
                 commit('SET_USER', user)
                 commit('SET_TOKEN', token)
