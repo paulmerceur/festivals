@@ -41,12 +41,12 @@ export default {
                 return;
             }
             try {
-                await this.$store.dispatch('register', {
+                this.$store.dispatch('register', {
                 email: this.email,
                 password: this.password,
                 });
                 // Redirect the user to the home page on successful login
-                this.$router.push('/home');
+                this.$router.push('/');
             } catch (error) {
                 this.error = error.response.data.error;
             }

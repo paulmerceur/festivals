@@ -1,9 +1,10 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 
+const base_url = 'https://festivals-api.onrender.com/'
+
 const instance = axios.create({
-    baseURL: 'http://localhost:3000/'
-    // baseURL: 'https://festivals-api.onrender.com/'
+    baseURL: base_url,
 })
 
 export default createStore({
@@ -11,6 +12,7 @@ export default createStore({
         user: null,
         token: null,
         isAdmin: false,
+        base_url: base_url,
     },
     mutations: {
         SET_USER(state, user) {
@@ -49,9 +51,9 @@ export default createStore({
         async register({ commit }, { email, password }) {
             try {
                 const response = await instance.post('auth/register', { email, password })
-                const { user, token } = response.data
+                const { session, user } = response.data
                 commit('SET_USER', user)
-                commit('SET_TOKEN', token)
+                commit('SET_TOKEN', session)
             } catch (error) {
                 console.error(error)
                 throw error
@@ -73,6 +75,7 @@ export default createStore({
         isAuthenticated: state => !!state.token,
         user: state => state.user,
         token: state => state.token,
-        isAdmin: state => state.isAdmin
+        isAdmin: state => state.isAdmin,
+        base_url: state => state.base_url,
     },
 })

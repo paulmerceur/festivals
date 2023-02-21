@@ -6,7 +6,7 @@
 export default {
     name: 'App',
     data() { return {
-        base_url: 'https://festivals-api.onrender.com/'
+        base_url: this.$store.getters.base_url
     }},
     created() {
         document.title = "GameFest";
