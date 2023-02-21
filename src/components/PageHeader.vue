@@ -29,8 +29,12 @@ export default {
     name: 'PageHeader',
     methods: {
         ...mapActions(['logout']),
-        goHome() {
+        logout: async function() {
+            this.$store.dispatch('logout');
             this.$router.push('/');
+        },
+        goHome() {
+            this.$router.push('/home');
         },
         goToListeJeux() {
             this.$router.push('/jeux');
