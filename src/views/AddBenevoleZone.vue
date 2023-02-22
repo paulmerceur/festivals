@@ -6,7 +6,6 @@
             <div class="form-group">
                 <label for="benevole">Bénévole</label>
                 <select class="form-control" id="benevole" v-model="benevole">
-                    <option value="" disabled selected>Select your option</option>
                     <option v-for="benevole in benevoles" :value="benevole.id" :key="benevole.id">{{benevole.nom}} {{benevole.prenom}}</option>
                 </select>
             </div>
