@@ -1,4 +1,8 @@
 import { createWebHistory, createRouter } from "vue-router";
+
+import store from "@/store.js";
+
+import LoginPage from "@/views/LoginPage.vue";
 import ListeJeux from "@/views/ListeJeux.vue";
 import JeuView from "@/views/JeuView.vue";
 import ListeBenevoles from "@/views/ListeBenevoles.vue";
@@ -12,10 +16,15 @@ import ModifyJeu from "@/views/ModifyJeu.vue";
 import ModifyBenevole from "@/views/ModifyBenevole.vue";
 
 const routes = [
+    {
+        name: 'LoginPage',
+        path: '/',
+        component: LoginPage,
+    },
     { 
         name: 'ListeJeux',
-        path: '/',
-        alias: '/jeux', 
+        path: '/jeux',
+        alias: '/home', 
         component: ListeJeux,
       },
     {
@@ -71,8 +80,16 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+    history: createWebHistory(),
+    routes,
+  })
+
+// Global navigation guard (user needs to be logged in to access any page)
+router.beforeEach((to, from, next) => {
+    if (to.name !== 'LoginPage' && !store.state.token) next({ name: 'LoginPage' })
+    else {
+        next()
+    }
 })
 
 export default router;

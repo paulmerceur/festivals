@@ -3,7 +3,7 @@
         <!--title-->
         <h1 v-if="title">{{ title }}</h1>
         <input v-if="!emptyList" type="text" id="search-bar" v-model="searchBar" placeholder="Rechercher...">
-        <button v-if="canCreateThisType" @click="goToCreationPage" class="basic-button">Ajouter un  {{ textButton }} </button>
+        <button v-if="canCreateThisType && this.$store.state.isAdmin" @click="goToCreationPage" class="basic-button">Ajouter un  {{ textButton }} </button>
         <div v-if="!emptyList" class="list">
             <ListItem v-if="listHeader!=undefined && filteredList()" :item="listHeader" :type="type" :isHeader=true></ListItem>
             <ListItem v-for="item in filteredList()" :key="item.id" :item="item" :type="type"></ListItem>
