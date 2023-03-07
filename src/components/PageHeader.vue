@@ -5,7 +5,7 @@
                 <button class="basic-button" @click="logout">Déconnexion</button>
             </div>
             <div @click="goHome" id="logo">
-                <img src="../assets/logo.png" alt="App logo" />
+                <img src="../../public/logo.png" alt="App logo" />
             </div>
             <div id="tabMenu">
                 <button class="tab" :class="{activeTab: this.currentRoute == 'ListeJeux'}" @click="goToListeJeux">
@@ -72,8 +72,8 @@ export default {
 }
 
 #logo {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     margin: 40px auto;
     cursor: pointer;
 }
