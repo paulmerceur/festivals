@@ -8,9 +8,9 @@ npm run serve
 
 ## Technologies utilisées
 * Package manager: npm
-* Backend framework: Express.js
-* Database (+hosting): Supabase (PostgreSQL)
+* Frontend framework: Vue.js
+* State management: Vuex
+* Routing: Vue Router
+* Backend runtime: Node.js
 * Hosting: Render.com (utilizing HTTPS for security)
-* API testing tool: Postman
-* Middleware: Body-parser and CORS middleware for Express.js
-* Node.js packages: express, body-parser, cors, and pg (PostgreSQL library for Node.js)
+* HTTP client: axios
