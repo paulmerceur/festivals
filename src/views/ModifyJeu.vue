@@ -9,11 +9,15 @@
             </div>
             <div class="form-group">
                 <label for="type">Type</label>
-                <input type="text" class="form-control" id="type" v-model="type" placeholder="Type du jeu">
+                <select class="form-control" id="type" v-model="type">
+                    <option v-for="type in types" :value="type" :key="type">{{type}}</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="zone">Zone</label>
-                <input type="number" class="form-control" id="zone" v-model="zone" placeholder="Zone du jeu">
+                <select class="form-control" id="zone" v-model="zone">
+                    <option v-for="zone in zones" :value="zone.id" :key="zone.id">{{zone.nom}}</option>
+                </select>
             </div>
             <div class="buttons">
                 <button @click="goBack" class="basic-button">Annuler</button>
@@ -34,8 +38,10 @@ export default {
     data() {
         return {
             currentJeuId: "",
+            zones: [],
+            types: [],
             nom: '',
-            type: '',
+            type: "",
             zone: ''
         }
     },
@@ -66,11 +72,21 @@ export default {
             } else {
                 console.log('error')
             }
+        },
+        getZones: async function() {
+            await fetch(this.$root.base_url + "zones/").then(res => res.json()).then(data => {
+                this.zones = data;
+            });
+        },
+        getTypes: async function() {
+           this.types = ["enfant", "initié", "famille", "expert", "ambiance"];
         }
     },
     created() {
         this.currentJeuId = this.$router.currentRoute._value.params.id
         this.getJeu()
+        this.getZones();
+        this.getTypes();
     },
 }
 </script>
