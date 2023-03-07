@@ -104,7 +104,7 @@ h1 {
     margin-bottom: 20px;
 }
 .list-component {
-    margin-top: 100px;
+    margin-top: 10px;
 }
 
 .list {
