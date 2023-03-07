@@ -1,24 +1,16 @@
 # festivals
 
-## Project setup
+## Lancer le projet en local
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Technologies utilisées
+* Package manager: npm
+* Frontend framework: Vue.js
+* State management: Vuex
+* Routing: Vue Router
+* Backend runtime: Node.js
+* Hosting: Render.com (utilizing HTTPS for security)
+* HTTP client: axios

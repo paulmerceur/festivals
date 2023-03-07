@@ -16,6 +16,9 @@
             <div v-if="error">
                 {{ error }}
             </div>
+            <div v-if="user_registered">
+                {{ check_email }}
+            </div>
         </form>
     </div>
 </template>
@@ -28,7 +31,9 @@ export default {
     data() { return {
         email: "",
         password: "",
-        error: ""
+        error: "",
+        user_registered: false,
+        check_email: "Veuillez cliquer sur le lien de confirmation envoyé à votre adresse email"
     } },
     methods: {
         ...mapActions(['register']),
@@ -40,13 +45,13 @@ export default {
                 this.error = "Le mot de passe doit contenir au moins 8 caractères";
                 return;
             }
+            this.error = "";
+            this.user_registered = true;
             try {
                 this.$store.dispatch('register', {
                 email: this.email,
                 password: this.password,
                 });
-                // Redirect the user to the home page on successful login
-                this.$router.push('/');
             } catch (error) {
                 this.error = error.response.data.error;
             }

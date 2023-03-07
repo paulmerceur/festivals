@@ -4,6 +4,8 @@
         <h1 class="nom">{{jeu.nom}}</h1>
         <h2 class="type">Type de jeu: {{jeu.type}}</h2>
         <h2 class="zone">Zone: {{jeu.zone}}</h2>
+        <h2>Description</h2>
+        <p class="description">{{jeu.description}}</p>
         <div class="buttons">
             <button class="basic-button" @click="goToModifyJeu">Modifier</button>
             <button class="basic-button" @click="deleteJeu">Supprimer</button>
@@ -52,3 +54,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+p {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+</style>

@@ -19,6 +19,10 @@
                     <option v-for="zone in zones" :value="zone.id" :key="zone.id">{{zone.nom}}</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" v-model="description" placeholder="Description du jeu">
+            </div>
             <button @click="createJeu" class="basic-button">Valider</button>
         </div>
     </div>
@@ -37,7 +41,7 @@ export default {
             zones: [],
             types: [],
             nom: '',
-            type: "",
+            type: '',
             zone: ''
         }
     },
@@ -49,6 +53,7 @@ export default {
                 body: JSON.stringify({
                     nom: this.nom,
                     type: this.type,
+                    description: this.description,
                     zone: Number(this.zone)
                 })
             })

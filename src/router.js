@@ -14,6 +14,7 @@ import CreateJeu from "@/views/CreateJeu.vue";
 import CreateBenevole from "@/views/CreateBenevole.vue";
 import ModifyJeu from "@/views/ModifyJeu.vue";
 import ModifyBenevole from "@/views/ModifyBenevole.vue";
+import DisplayInfos from "@/views/DisplayInfos.vue";
 
 const routes = [
     {
@@ -76,6 +77,11 @@ const routes = [
         name: 'ModifyBenevole',
         path: '/modify-benevole/:id',
         component: ModifyBenevole,
+    },
+    {
+        name: 'DisplayInfos',
+        path: '/infos',
+        component: DisplayInfos,
     },
 ]
 
