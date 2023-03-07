@@ -46,6 +46,7 @@ export default {
             types: [],
             nom: '',
             type: '',
+            description: '',
             zone: ''
         }
     },
