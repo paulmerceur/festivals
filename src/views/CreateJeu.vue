@@ -15,6 +15,10 @@
                 <label for="zone">Zone</label>
                 <input type="number" class="form-control" id="zone" v-model="zone" placeholder="Zone du jeu">
             </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" v-model="description" placeholder="Description du jeu">
+            </div>
             <button @click="createJeu" class="basic-button">Valider</button>
         </div>
     </div>
@@ -32,6 +36,7 @@ export default {
         return {
             nom: '',
             type: '',
+            description: '',
             zone: ''
         }
     },
@@ -43,6 +48,7 @@ export default {
                 body: JSON.stringify({
                     nom: this.nom,
                     type: this.type,
+                    description: this.description,
                     zone: Number(this.zone)
                 })
             })

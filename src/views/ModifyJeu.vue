@@ -15,6 +15,10 @@
                 <label for="zone">Zone</label>
                 <input type="number" class="form-control" id="zone" v-model="zone" placeholder="Zone du jeu">
             </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" v-model="description" placeholder="Description du jeu">
+            </div>
             <div class="buttons">
                 <button @click="goBack" class="basic-button">Annuler</button>
                 <button @click="modifyJeu" class="basic-button">Valider</button>
@@ -36,6 +40,7 @@ export default {
             currentJeuId: "",
             nom: '',
             type: '',
+            description: '',
             zone: ''
         }
     },
@@ -48,6 +53,7 @@ export default {
                 .then(response => response.json()).then(data => {
                     this.nom = data.nom
                     this.type = data.type
+                    this.description = data.description
                     this.zone = data.zone.id
                 })
         },
@@ -58,6 +64,7 @@ export default {
                 body: JSON.stringify({
                     nom: this.nom,
                     type: this.type,
+                    description: this.description,
                     zone: Number(this.zone)
                 })
             })
